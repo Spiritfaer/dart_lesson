@@ -11,68 +11,69 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 400,
-      child: (_transactions.isEmpty
-          ? Column(
-              children: [
-                Text(
-                  "No transactions added yet!",
-                  style: Theme.of(context).textTheme.title,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
+    return (_transactions.isEmpty
+        ? LayoutBuilder(
+            builder: (context, constraints) {
+              return Column(
+                children: [
+                  Text(
+                    "No transactions added yet!",
+                    style: Theme.of(context).textTheme.title,
                   ),
-                ),
-              ],
-            )
-          : ListView.builder(
-              itemBuilder: (context, index) {
-                return Card(
-                  shadowColor: Colors.blue,
-                  elevation: 3,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      child: Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Container(
-                          height: 20,
-                          child: FittedBox(
-                            child: Text(
-                                '\$${_transactions[index].amount.toStringAsFixed(2)}'),
-                          ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: constraints.maxHeight * 0.6,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              );
+            },
+          )
+        : ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                shadowColor: Colors.blue,
+                elevation: 3,
+                child: ListTile(
+                  leading: CircleAvatar(
+                    radius: 30,
+                    child: Padding(
+                      padding: EdgeInsets.all(6),
+                      child: Container(
+                        height: 20,
+                        child: FittedBox(
+                          child: Text(
+                              '\$${_transactions[index].amount.toStringAsFixed(2)}'),
                         ),
                       ),
                     ),
-                    title: Text(
-                      _transactions[index].title,
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                    subtitle: Text(
-                      DateFormat.yMMMMd('en_US')
-                          .format(_transactions[index].date),
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete),
-                      color: Theme.of(context).errorColor,
-                      onPressed: () =>
-                          _deleteTransactionCall(_transactions[index].id),
+                  ),
+                  title: Text(
+                    _transactions[index].title,
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd('en_US')
+                        .format(_transactions[index].date),
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
                     ),
                   ),
-                );
-              },
-              itemCount: _transactions.length)),
-    );
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    color: Theme.of(context).errorColor,
+                    onPressed: () =>
+                        _deleteTransactionCall(_transactions[index].id),
+                  ),
+                ),
+              );
+            },
+            itemCount: _transactions.length));
   }
 }
