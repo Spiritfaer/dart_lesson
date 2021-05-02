@@ -59,14 +59,14 @@ class _NewTransactionState extends State<NewTransaction> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Title',
               ),
               controller: _titleController,
               onSubmitted: (_) => _submitData(),
             ),
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Amount',
               ),
               controller: _amountController,
@@ -89,14 +89,14 @@ class _NewTransactionState extends State<NewTransaction> {
                       primary: Theme.of(context).primaryColor,
                       textStyle: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    child: Text('Chose Date'),
+                    child: const Text('Chose Date'),
                     onPressed: _presentDatePicker,
                   ),
                 ],
               ),
             ),
             ElevatedButton(
-              child: Text('Add Transaction'),
+              child: const Text('Add Transaction'),
               style: ElevatedButton.styleFrom(
                 onPrimary: Theme.of(context).textTheme.button.color,
                 primary: Theme.of(context).primaryColor,
