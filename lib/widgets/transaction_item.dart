@@ -44,11 +44,18 @@ class TransactionItem extends StatelessWidget {
             fontSize: 12,
           ),
         ),
-        trailing: IconButton(
-          icon: const Icon(Icons.delete),
-          color: Theme.of(context).errorColor,
-          onPressed: () => _deleteTransactionCall(_transaction.id),
-        ),
+        trailing: MediaQuery.of(context).size.width > 460
+            ? FlatButton.icon(
+                icon: const Icon(Icons.delete),
+                label: const Text('Delete'),
+                textColor: Theme.of(context).errorColor,
+                onPressed: () => _deleteTransactionCall(_transaction.id),
+              )
+            : IconButton(
+                icon: const Icon(Icons.delete),
+                color: Theme.of(context).errorColor,
+                onPressed: () => _deleteTransactionCall(_transaction.id),
+              ),
       ),
     );
   }
